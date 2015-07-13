@@ -1,0 +1,94 @@
+
+body {
+  margin: 0px;
+}
+.hidden {
+  display: none;
+}
+.clock {
+  width: 90%;
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+.template {
+  display:none;
+}
+.agent {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 96%;
+  padding: 1%;
+  min-height: 120px;
+  border: solid 2px black;
+}
+
+.capabilities {
+  min-width: 120px;
+}
+
+.capability {
+  display: inline-block;
+  width: 100px;
+  border: solid 1px black;  
+  padding: 2px;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.capability.supported {
+  background: rgba(0,255,0, 0.6);
+}
+
+.capability.maybe {
+  background: rgba(255,255,0, 0.6);
+}
+
+.capability.unsupported {
+  background: rgba(255,0, 0, 0.6);
+}
+
+.screencontainer {
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  width: 100px;
+  height: 100px;
+}
+.screen {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 75;
+  height: 100;
+  background: rgba(0,0,50,0.5);
+  border: solid 1px black;
+}
+
+.agent .battery {
+  position: absolute;
+  height: 100px;
+  right: 20px;
+  top: 0px;
+}
+
+.agent .battery img {
+  height: 120px;
+  margin-right:10px;
+}
+
+.agent .battery .level {
+  position: absolute;
+  font-size: 1.5em;
+  color: black;
+  top: 60px;
+  right: 25px;
+  transform: rotate(-90deg);
+  text-align: right;
+  width: 30px;
+  height: 20px;
+}
+

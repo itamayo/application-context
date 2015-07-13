@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/demo.css" rel="stylesheet">
+    <script src="js/jquery-2.1.3.min.js"></script>
+
+    <script type="text/javascript">
+        function update_screen_size($elem, width, height) {
+            // Max 100x100 pixels
+            var scale = 100 / Math.max(width, height);
+            $elem.css("width", width * scale);
+            $elem.css("height", height * scale);
+        }
+
+        function create_new(id) {
+            var n = $(".template .agent").clone().attr("id", id);
+            $("body").append(n);
+        }
+
+        window.onresize = function () {
+            $(".capabilities").css("width", window.innerWidth - 200 + "px");
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="clock">
+        <span id="ts">12331233123123.123</span>
+    </div>
+
+    <div class="agent" id="agent1">
+        <div class='capabilities'>
+            <div class="capability supported">Touchscreen</div>
+            <div class="capability maybe">Vibrate</div>
+            <div class="capability unsupported">Location</div>
+            <div class="capability supported">Touchscreen</div>
+            <div class="capability maybe">Vibrate</div>
+            <div class="capability unsupported">Location</div>
+            <div class="capability supported">Touchscreen</div>
+            <div class="capability maybe">Vibrate</div>
+            <div class="capability unsupported">Location</div>
+            </capabilities>
+        </div>
+        <div class="screencontainer">
+            <div class='screen'></div>
+        </div>
+        <div class='battery'>
+            <img src="img/batfull.jpg" />
+            <div class="level">80%</div>
+        </div>
+    </div>
+
+    <div class="agent" id="agent2">
+        <div class='capabilities'>
+            <div class="capability supported">Touchscreen</div>
+            <div class="capability maybe">Vibrate</div>
+            <div class="capability unsupported">Location</div>
+            <div class="capability supported">Touchscreen</div>
+            <div class="capability maybe">Vibrate</div>
+            <div class="capability unsupported">Location</div>
+            <div class="capability supported">Touchscreen</div>
+            <div class="capability maybe">Vibrate</div>
+            <div class="capability unsupported">Location</div>
+            </capabilities>
+        </div>
+        <div class="screencontainer">
+            <div class='screen'></div>
+        </div>
+        <div class='battery'>
+            <img src="img/batfull.jpg" />
+            <div class="level">80%</div>
+        </div>
+    </div>
+
+
+    <div class="template">
+        <div class="agent" id="new">
+            <div class='capabilities'>
+            </div>
+            <div class="screencontainer">
+                <div class='screen'></div>
+            </div>
+            <div class='battery'>
+                <img src="img/batfull.jpg" />
+                <div class="level">---</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
