@@ -72,12 +72,12 @@ define([""], function () {
                 h = _contextItems[what].callbacks[i];
                 if (handler === undefined) {
                     // all handlers to be invoked, except those with pending immeditate
-                    if (h._immediate_pending) {
+                    if (h['_immediate_pending_' + what]) {
                         continue;
                     }
                 } else {
                     // only given handler to be called
-                    if (h === handler) handler._immediate_pending = false;
+                    if (h === handler) handler['_immediate_pending_' + what] = false;
                     else {
                         continue;
                     }
@@ -151,7 +151,7 @@ define([""], function () {
                 // register handler
                 _contextItems[what].callbacks.push(handler);
                 // flag handler
-                handler._immediate_pending = true;
+                handler['_immediate_pending_' + what] = true;
                 // do immediate callback
                 setTimeout(function () {
                     _doCallbacks(what, {

@@ -151,12 +151,12 @@ define(["socketio"], function (io) {
                 h = _callbacks[what][i];
                 if (handler === undefined) {
                     // all handlers to be invoked, except those with pending immeditate
-                    if (h._immediate_pending) {
+                    if (h['_immediate_pending_' + what]) {
                         continue;
                     }
                 } else {
                     // only given handler to be called
-                    if (h === handler) handler._immediate_pending = false;
+                    if (h === handler) handler['_immediate_pending_' + what] = false;
                     else {
                         continue;
                     }
@@ -582,14 +582,14 @@ define(["socketio"], function (io) {
                 // register handler
                 _callbacks[what].push(handler);
                 // flag handler
-                handler._immediate_pending = true;
+                handler['_immediate_pending_' + what] = true;
                 // do immediate callback
                 setTimeout(function () {
                     switch (what) {
                     case 'change':
                         var keys = Object.keys(_sharedStates);
                         if (keys.length === 0) {
-                            handler._immediate_pending = false;
+                            handler['_immediate_pending_' + what] = false;
                         } else {
                             for (var i = 0, len = keys.length; i < len; i++) {
                                 var state = {
@@ -604,7 +604,7 @@ define(["socketio"], function (io) {
                     case 'presence':
                         var keys = Object.keys(_presence);
                         if (keys.length === 0) {
-                            handler._immediate_pending = false;
+                            handler['_immediate_pending_' + what] = false;
                         } else {
                             for (var i = 0, len = keys.length; i < len; i++) {
                                 var presence = {
@@ -616,7 +616,7 @@ define(["socketio"], function (io) {
                         }
                         break;
                     case 'remove':
-                        handler._immediate_pending = false;
+                        handler['_immediate_pending_' + what] = false;
                         break;
                     case 'readystatechange':
                         _do_callbacks("readystatechange", readystate.get(), handler);

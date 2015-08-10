@@ -29,6 +29,10 @@ define(["socketio"], function (io) {
         if (!options) {
             var options = {};
         }
+        
+        if (!options.maxTimeout){
+            options.maxTimeout = 2000;
+        }
 
         options.forceNew = true;
         options.multiplex = false;
@@ -108,12 +112,12 @@ define(["socketio"], function (io) {
                 h = _callbacks[what][i];
                 if (handler === undefined) {
                     // all handlers to be invoked, except those with pending immeditate
-                    if (h._immediate_pending) {
+                    if (h['_immediate_pending_' + what]) {
                         continue;
                     }
                 } else {
                     // only given handler to be called
-                    if (h === handler) handler._immediate_pending = false;
+                    if (h === handler) handler['_immediate_pending_' + what] = false;
                     else {
                         continue;
                     }
@@ -194,7 +198,7 @@ define(["socketio"], function (io) {
                     reject({
                         error: 'timeout'
                     })
-                }, 2000);
+                }, options.maxTimeout);
             });
         };
 
@@ -215,7 +219,7 @@ define(["socketio"], function (io) {
                     reject({
                         error: 'timeout'
                     })
-                }, 2000);
+                }, options.maxTimeout);
             });
         };
 
@@ -284,7 +288,7 @@ define(["socketio"], function (io) {
                 // register handler
                 _callbacks[what].push(handler);
                 // flag handler
-                handler._immediate_pending = true;
+                handler['_immediate_pending_' + what] = true;
                 // do immediate callback
                 setTimeout(function () {
                     switch (what) {
